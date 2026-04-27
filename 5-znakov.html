@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priročnik: 5 znakov, da vaše podjetje potrebuje Power BI | Skupina stroka.si</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #50afb0;
+            --teal-dark: #3d8c8d;
+            --teal-light: #e8f6f6;
+            --red: #e35c4f;
+            --red-dark: #c44a3d;
+            --red-light: #fdf0ee;
+            --amber: #f59e0b;
+            --amber-light: #fef3c7;
+            --green: #22c55e;
+            --green-light: #dcfce7;
+            --black: #111111;
+            --dark: #1a1a1a;
+            --mid: #555;
+            --light: #888;
+            --border: #e5e5e5;
+            --bg: #f8f8f6;
+            --white: #fff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--dark);
+            background: var(--white);
+            line-height: 1.65;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            background: var(--black);
+            padding: 14px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .topbar img { height: 28px; }
+        .topbar-link {
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+        }
+        .topbar-link:hover { color: var(--teal); }
+
+        /* HERO */
+        .hero {
+            background: var(--black);
+            padding: 72px 48px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal) 0%, var(--teal-dark) 30%, transparent 80%);
+        }
+        .hero-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(80,175,176,0.15);
+            border: 1px solid rgba(80,175,176,0.3);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            line-height: 1.15;
+            color: var(--white);
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--teal);
+        }
+        .hero-desc {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.55);
+            font-weight: 300;
+            max-width: 580px;
+            line-height: 1.75;
+        }
+
+        /* PROGRESS */
+        .progress-bar-wrap {
+            background: var(--teal-light);
+            padding: 20px 48px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .progress-label {
+            font-size: 13px;
+            color: var(--teal-dark);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(80,175,176,0.25);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--teal);
+            border-radius: 3px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+        .progress-score {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--teal-dark);
+            white-space: nowrap;
+        }
+
+        /* MAIN */
+        .main-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 64px 48px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .guide-content {}
+
+        .section-block { margin-bottom: 56px; }
+
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .section-icon.signal { background: var(--red-light); }
+        .section-icon.action { background: var(--teal-light); }
+        .section-icon.check  { background: var(--green-light); }
+        .section-icon.compare { background: var(--amber-light); }
+
+        .section-num {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--light);
+            margin-bottom: 4px;
+        }
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.55rem;
+            font-weight: 400;
+            color: var(--black);
+            line-height: 1.2;
+        }
+
+        .guide-content p {
+            font-size: 0.95rem;
+            color: var(--mid);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+        .guide-content strong { color: var(--dark); font-weight: 500; }
+
+        /* Signal cards – the "5 znakov" */
+        .signal-list { margin: 24px 0; }
+        .signal-card {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px 24px;
+            margin-bottom: 14px;
+            background: var(--white);
+            border-left: 4px solid var(--red);
+            transition: box-shadow 0.2s;
+        }
+        .signal-card:hover { box-shadow: 0 4px 16px rgba(227,92,79,0.1); }
+        .signal-num {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            color: var(--red);
+            line-height: 1;
+            flex-shrink: 0;
+            width: 36px;
+            font-weight: 400;
+        }
+        .signal-body h4 {
+            font-size: 14.5px;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+        .signal-body p {
+            font-size: 13px;
+            color: var(--mid);
+            margin: 0;
+            line-height: 1.6;
+        }
+        .signal-body .signal-example {
+            margin-top: 10px;
+            font-size: 12.5px;
+            color: var(--teal-dark);
+            background: var(--teal-light);
+            padding: 8px 12px;
+            border-radius: 6px;
+            line-height: 1.55;
+        }
+
+        /* Use-cases grid */
+        .usecase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin: 24px 0;
+        }
+        .usecase-card {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            background: var(--white);
+            border-top: 3px solid var(--teal);
+            transition: box-shadow 0.2s;
+        }
+        .usecase-card:hover { box-shadow: 0 4px 16px rgba(80,175,176,0.1); }
+        .usecase-card .uc-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--teal-dark);
+            margin-bottom: 8px;
+        }
+        .usecase-card h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        .usecase-card p {
+            font-size: 12.5px;
+            color: var(--mid);
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* CHECKLIST */
+        .checklist-intro {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+        .checklist-intro p { font-size: 13px; color: var(--mid); margin: 0; }
+
+        .checklist { list-style: none; }
+
+        .checklist-category {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--light);
+            padding: 16px 0 8px;
+            border-top: 1px solid var(--border);
+            margin-top: 8px;
+        }
+        .checklist-category:first-child { border-top: none; margin-top: 0; }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            cursor: pointer;
+            transition: background 0.15s;
+            border-radius: 6px;
+            padding: 14px 12px;
+            margin: 2px 0;
+        }
+        .checklist-item:hover { background: var(--bg); }
+        .checklist-item.checked { background: var(--green-light); }
+        .checklist-item.checked .ci-text { color: #166534; }
+        .checklist-item.checked .ci-text .ci-sub { color: #16a34a; }
+
+        .ci-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            margin-top: 1px;
+        }
+        .checklist-item.checked .ci-checkbox {
+            background: var(--green);
+            border-color: var(--green);
+        }
+        .ci-check-icon { display: none; color: white; font-size: 13px; font-weight: 700; }
+        .checklist-item.checked .ci-check-icon { display: block; }
+
+        .ci-main {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark);
+            line-height: 1.4;
+        }
+        .ci-sub {
+            font-size: 12px;
+            color: var(--light);
+            margin-top: 3px;
+            line-height: 1.4;
+        }
+        .ci-badge {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        .badge-high { background: var(--red-light); color: var(--red-dark); }
+        .badge-med  { background: var(--amber-light); color: #92400e; }
+        .badge-low  { background: var(--teal-light); color: var(--teal-dark); }
+
+        /* Result box */
+        .result-box {
+            margin-top: 28px;
+            border-radius: 12px;
+            padding: 24px;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+        .result-box.level-low  { border-color: var(--red);   background: var(--red-light); }
+        .result-box.level-mid  { border-color: var(--amber); background: var(--amber-light); }
+        .result-box.level-high { border-color: var(--green); background: var(--green-light); }
+
+        .result-score {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+        .level-low  .result-score { color: var(--red-dark); }
+        .level-mid  .result-score { color: #92400e; }
+        .level-high .result-score { color: #166534; }
+
+        .result-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+        .level-low  .result-title { color: var(--red-dark); }
+        .level-mid  .result-title { color: #78350f; }
+        .level-high .result-title { color: #166534; }
+
+        .result-desc { font-size: 13px; line-height: 1.6; }
+        .level-low  .result-desc { color: #7a2d23; }
+        .level-mid  .result-desc { color: #92400e; }
+        .level-high .result-desc { color: #16a34a; }
+
+        .result-cta {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .result-cta:hover { opacity: 0.85; }
+        .level-low  .result-cta { background: var(--red);   color: white; }
+        .level-mid  .result-cta { background: var(--amber); color: white; }
+        .level-high .result-cta { background: var(--green); color: white; }
+
+        /* FORM SIDEBAR */
+        .guide-sidebar { position: sticky; top: 24px; }
+
+        .form-card {
+            background: white;
+            border: 1.5px solid var(--teal);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(80,175,176,0.12);
+        }
+        .form-head {
+            background: var(--teal);
+            padding: 24px 26px;
+            color: white;
+        }
+        .form-head .eyebrow {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.75;
+            margin-bottom: 8px;
+        }
+        .form-head h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+        .form-head .sub { font-size: 13px; opacity: 0.75; line-height: 1.5; }
+        .form-body { padding: 22px 26px 26px; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label {
+            display: block;
+            font-size: 12.5px;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        .req { color: var(--red); }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 13px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--dark);
+            background: white;
+            transition: border-color 0.2s;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 13px center;
+            padding-right: 32px;
+            cursor: pointer;
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(80,175,176,0.1);
+        }
+        .error-msg { font-size: 12px; color: var(--red); margin-top: 4px; display: none; }
+        .input-error .error-msg { display: block; }
+        .input-error input, .input-error select { border-color: var(--red); }
+
+        .form-divider { height: 1px; background: var(--border); margin: 18px 0; }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--teal);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 14.5px;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 4px;
+        }
+        .btn-submit:hover { background: var(--teal-dark); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+        .form-note {
+            margin-top: 12px;
+            font-size: 11.5px;
+            color: var(--light);
+            text-align: center;
+            line-height: 1.55;
+        }
+        .form-note a { color: var(--teal); }
+
+        .spinner {
+            display: inline-block;
+            width: 14px; height: 14px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .success-state {
+            display: none;
+            padding: 36px 26px;
+            text-align: center;
+        }
+        .success-icon {
+            width: 56px; height: 56px;
+            background: var(--teal-light);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 24px;
+            color: var(--teal-dark);
+        }
+        .success-state h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .success-state p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+        .contact-strip {
+            margin-top: 20px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 20px;
+        }
+        .contact-strip p { font-size: 12.5px; color: var(--mid); line-height: 1.6; }
+        .contact-strip a { color: var(--teal); text-decoration: none; }
+
+        /* FOOTER */
+        .site-footer {
+            background: var(--black);
+            padding: 48px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        .site-footer img { height: 26px; margin-bottom: 18px; }
+        .site-footer p { font-size: 13px; color: rgba(255,255,255,0.35); margin: 4px 0; }
+        .site-footer a { color: var(--teal); text-decoration: none; }
+
+        @media (max-width: 900px) {
+            .main-wrap { grid-template-columns: 1fr; padding: 40px 24px; }
+            .guide-sidebar { position: static; }
+            .usecase-grid { grid-template-columns: 1fr; }
+            .hero { padding: 56px 24px 48px; }
+            .topbar, .progress-bar-wrap, .site-footer { padding-left: 24px; padding-right: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <a href="https://www.stroka.si" target="_blank">
+        <img src="https://www.stroka.si/Portals/_default/logo_stroka_si_white.png?ver=2025-06-04-113611-483&timestamp=1749029751774" alt="Stroka.si">
+    </a>
+    <a href="#" class="topbar-link">← Nazaj na članek</a>
+</div>
+
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">Brezplačen priročnik · Skupina stroka.si</div>
+        <h1><em>5 znakov</em>, da vaše podjetje<br>potrebuje Power BI</h1>
+        <p class="hero-desc">Interaktivni samoocenitveni test in konkretni naslednji koraki — za podjetja, ki so prerasla Excel, a še niso vlagala v resno analitiko.</p>
+    </div>
+</div>
+
+<div class="progress-bar-wrap">
+    <span class="progress-label">Vaša BI zrelost:</span>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-score" id="progressScore">0 / 10 točk</span>
+</div>
+
+<div class="main-wrap">
+
+    <!-- LEFT CONTENT -->
+    <div class="guide-content">
+
+        <!-- SECTION 1: 5 znakov -->
+        <div class="section-block">
+            <div class="section-header">
+                <div class="section-icon signal">📊</div>
+                <div class="section-title-wrap">
+                    <div class="section-num">Poglavje 01</div>
+                    <h2 class="section-title">5 znakov, da vaše podjetje potrebuje Power BI</h2>
+                </div>
+            </div>
+
+            <p>Večina podjetij ne opazi pravega trenutka, ko Excel postane zaviralni dejavnik namesto orodja za rast. Ti znaki so pogosto tihi — a ko jih prepoznate, je odločitev jasna.</p>
+
+            <div class="signal-list">
+                <div class="signal-card">
+                    <div class="signal-num">1</div>
+                    <div class="signal-body">
+                        <h4>Poročila so pripravljena ročno — in so ob objavi že zastarela</h4>
+                        <p>Nekdo vsak teden ali mesec kopiira podatke iz ERP-a, CRM-a in Excela v eno datoteko. Postopek traja ure. Ko so poročila končana, odražajo stanje izpred dneva ali tedna — ne danes.</p>
+                        <div class="signal-example">💡 Power BI poveže vse vire enkrat. Vsa poročila se nato osvežijo samodejno — vsakih 15 minut ali enkrat na dan, kakor potrebujete.</div>
+                    </div>
+                </div>
+
+                <div class="signal-card">
+                    <div class="signal-num">2</div>
+                    <div class="signal-body">
+                        <h4>Vodstvo ne ve, kako dobro podjetje dejansko posluje — v tem trenutku</h4>
+                        <p>Na vprašanje »Kakšen je naš cashflow ta teden?« ali »Kateri produkt ima najboljšo maržo?« ni takojšnjega odgovora. Podatki obstajajo, a so razpršeni in nedostopni v realnem času.</p>
+                        <div class="signal-example">💡 Direktorski dashboard v Power BI pokaže ključne kazalnike v sekundah — kadar koli, na katerikoli napravi.</div>
+                    </div>
+                </div>
+
+                <div class="signal-card">
+                    <div class="signal-num">3</div>
+                    <div class="signal-body">
+                        <h4>Različne ekipe imajo različne »resnice« o istih podatkih</h4>
+                        <p>Prodaja ima svoje Excele, finance svoje, marketing svoje. Ob primerjavi se številke ne ujemajo. Srečanja se porabijo za razpravo o tem, kateri podatek je pravi — namesto za odločitve.</p>
+                        <div class="signal-example">💡 Power BI vzpostavi en sam vir resnice za celotno podjetje. Vse ekipe gledajo iste podatke, iz istih virov.</div>
+                    </div>
+                </div>
+
+                <div class="signal-card">
+                    <div class="signal-num">4</div>
+                    <div class="signal-body">
+                        <h4>Ne vidite vzorcev in trendov — le izolirana poročila</h4>
+                        <p>Veste, koliko ste prodali ta mesec. A ne vidite, kateri segment raste, kje so sezonska nihanja, kje se pojavlja težava, preden postane resna. Vaši podatki niso povezani v zgodbo.</p>
+                        <div class="signal-example">💡 Power BI vizualizira trende, primerja obdobja in — z napovedno analitiko — nakaže, kaj se bo zgodilo naslednji mesec.</div>
+                    </div>
+                </div>
+
+                <div class="signal-card">
+                    <div class="signal-num">5</div>
+                    <div class="signal-body">
+                        <h4>Vaš ERP, CRM ali proizvodni sistem ne »govorita« med seboj</h4>
+                        <p>Naročilo vstopi v CRM, gre v ERP, sproži nabavo, vpliva na proizvodnjo in zahteva fakturiranje. A teh korakov ne vidite skupaj — vsak sistem prikazuje le svoj košček zgodbe.</p>
+                        <div class="signal-example">💡 Power BI poveže vse sisteme in prikaže celotno poslovno sliko — od prodajne priložnosti do zaključene dostave.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Use cases -->
+        <div class="section-block">
+            <div class="section-header">
+                <div class="section-icon compare">🏢</div>
+                <div class="section-title-wrap">
+                    <div class="section-num">Poglavje 02</div>
+                    <h2 class="section-title">5 področij, kjer Power BI prinese največjo vrednost</h2>
+                </div>
+            </div>
+
+            <p>Power BI ni univerzalna rešitev za vse — je pa izjemno učinkovit v specifičnih poslovnih kontekstih. Spodaj so področja, kjer implementacije v podjetjih podobnih vašemu prinesejo najhitrejšo in najmerljivejšo vrednost.</p>
+
+            <div class="usecase-grid">
+                <div class="usecase-card">
+                    <div class="uc-label">Finance</div>
+                    <h4>FinCheck &amp; Cash Flow Planner</h4>
+                    <p>Živ pregled nad likvidnostjo, maržami po produktih in napovedjo denarnih tokov. Direktno iz vašega ERP-a ali računovodskega programa.</p>
+                </div>
+                <div class="usecase-card">
+                    <div class="uc-label">Prodaja &amp; CRM</div>
+                    <h4>Prodajni pipeline in KPI-ji</h4>
+                    <p>Pregled nad pipelinom, napovedmi in uspešnostjo ekipe. Integracija s Dynamics 365, Salesforce, HubSpot ali Pipedrive.</p>
+                </div>
+                <div class="usecase-card">
+                    <div class="uc-label">Proizvodnja</div>
+                    <h4>OEE in kakovostni kazalniki</h4>
+                    <p>OEE v realnem času, časi izpadov, kakovost na liniji in poraba materialov. Podatki iz MES sistemov in ERP-a na enem zaslonu.</p>
+                </div>
+                <div class="usecase-card">
+                    <div class="uc-label">Projekti</div>
+                    <h4>Projektni management dashboard</h4>
+                    <p>Pregled nad roki, proračuni in resursi za vse aktivne projekte. Integracija z MS Project, Jiro ali Plannerjem.</p>
+                </div>
+                <div class="usecase-card">
+                    <div class="uc-label">Vodstvo</div>
+                    <h4>Executive dashboard</h4>
+                    <p>En zaslon, ki direktorju pokaže celotno zdravje podjetja — prodaja, finance, operacije, kadri — v realnem času.</p>
+                </div>
+                <div class="usecase-card">
+                    <div class="uc-label">Analitika</div>
+                    <h4>Napovedna analitika</h4>
+                    <p>Napoved povpraševanja, optimizacija zalog, zaznavanje anomalij. Power BI z AI funkcijami, ki napoveduje — ne le poroča.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Checklist -->
+        <div class="section-block" id="checklist-section">
+            <div class="section-header">
+                <div class="section-icon check">✓</div>
+                <div class="section-title-wrap">
+                    <div class="section-num">Poglavje 03</div>
+                    <h2 class="section-title">Preverite BI zrelost vašega podjetja</h2>
+                </div>
+            </div>
+
+            <div class="checklist-intro">
+                <p>Označite trditve, ki veljajo za vaše podjetje. Na koncu boste prejeli oceno pripravljenosti in priporočila za naslednji korak.</p>
+            </div>
+
+            <ul class="checklist" id="biChecklist">
+
+                <li class="checklist-category">Podatki in poročanje</li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Poročila pripravljamo ročno vsak teden ali mesec <span class="ci-badge badge-high">Visok signal</span></div>
+                        <div class="ci-sub">Nekdo kopira podatke iz različnih sistemov v Excel ali PowerPoint</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Podatki se med ekipami ne ujemajo — »vsak ima svojo resnico« <span class="ci-badge badge-high">Visok signal</span></div>
+                        <div class="ci-sub">Prodaja, finance in management imajo različne številke za iste kazalnike</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Ob odločitvah čakamo na poročila, ki trajajo dneve ali tedne <span class="ci-badge badge-high">Visok signal</span></div>
+                        <div class="ci-sub">Ni možnosti vpogleda v žive podatke brez ročnega dela</div>
+                    </div>
+                </li>
+
+                <li class="checklist-category">Sistemi in integracije</li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Naš ERP in CRM sistema ne »komunicirata« samodejno <span class="ci-badge badge-high">Visok signal</span></div>
+                        <div class="ci-sub">Podatke med sistemi prenašamo ročno ali z izvozi/uvozi</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Imamo Microsoft 365 (ali Azure) okolje <span class="ci-badge badge-med">Prednost</span></div>
+                        <div class="ci-sub">Power BI Pro je pogosto že vključen ali dosegljiv po ugodni ceni</div>
+                    </div>
+                </li>
+
+                <li class="checklist-category">Poslovna analitika</li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Ne vidimo trendov in vzorcev — le izolirane mesečne številke <span class="ci-badge badge-high">Visok signal</span></div>
+                        <div class="ci-sub">Ni primerjave obdobij, segmentacije ali vizualnih trendov</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Vodstvo nima dostopa do ključnih kazalnikov brez posrednika <span class="ci-badge badge-med">Srednji signal</span></div>
+                        <div class="ci-sub">Za informacijo o prodaji ali cashflowu mora direktor vprašati nekoga</div>
+                    </div>
+                </li>
+
+                <li class="checklist-category">Rast in zrelost</li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Podjetje raste — in obstoječi procesi poročanja ne sledijo rasti <span class="ci-badge badge-med">Srednji signal</span></div>
+                        <div class="ci-sub">Kar je delovalo pri 20 zaposlenih, postaja obveza pri 60</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Že razmišljamo o analitiki ali BI, a nismo naredili konkretnega koraka <span class="ci-badge badge-low">Pripravljenost</span></div>
+                        <div class="ci-sub">Tema se pojavlja na sestankih, a projekt se ne začne</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Imamo specifično področje, kjer »zaslepljeno« sprejemamo odločitve <span class="ci-badge badge-med">Srednji signal</span></div>
+                        <div class="ci-sub">Npr. zaloge, marže, projekt, kakovost v proizvodnji …</div>
+                    </div>
+                </li>
+
+            </ul>
+
+            <div class="result-box" id="resultBox">
+                <div class="result-score" id="resultScore">0/10</div>
+                <div class="result-title" id="resultTitle">Začnite z ocenjevanjem</div>
+                <div class="result-desc" id="resultDesc">Označite trditve, ki veljajo za vaše podjetje, in prejmite personalizirano oceno pripravljenosti.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="guide-sidebar" id="form-anchor">
+        <div class="form-card">
+            <div class="form-head">
+                <div class="eyebrow">Brezplačen posvet</div>
+                <h2>Preverite, ali Power BI ustreza vašemu podjetju</h2>
+                <p class="sub">Naš strokovnjak vas bo kontaktiral in skupaj boste ocenili, kaj je smiselno za vaš konkretni primer.</p>
+            </div>
+            <div class="form-body" id="formBody">
+                <form id="consultForm" novalidate>
+
+                    <div class="form-group" id="group-name">
+                        <label>Ime in priimek <span class="req">*</span></label>
+                        <input type="text" id="f-name" name="name" placeholder="npr. Ana Novak" autocomplete="name">
+                        <div class="error-msg">Prosimo, vnesite ime in priimek.</div>
+                    </div>
+
+                    <div class="form-group" id="group-company">
+                        <label>Podjetje <span class="req">*</span></label>
+                        <input type="text" id="f-company" name="company" placeholder="npr. Podjetje d.o.o." autocomplete="organization">
+                        <div class="error-msg">Prosimo, vnesite ime podjetja.</div>
+                    </div>
+
+                    <div class="form-group" id="group-email">
+                        <label>E-mail <span class="req">*</span></label>
+                        <input type="email" id="f-email" name="email" placeholder="npr. ana@podjetje.si" autocomplete="email">
+                        <div class="error-msg">Prosimo, vnesite veljaven e-mail naslov.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefonska številka</label>
+                        <input type="tel" id="f-phone" name="phone" placeholder="+386 …" autocomplete="tel">
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <div class="form-group" id="group-size">
+                        <label>Število zaposlenih <span class="req">*</span></label>
+                        <select id="f-size" name="size">
+                            <option value="">– Izberite –</option>
+                            <option value="1-10">1–10 zaposlenih</option>
+                            <option value="11-30">11–30 zaposlenih</option>
+                            <option value="31-100">31–100 zaposlenih</option>
+                            <option value="101-300">101–300 zaposlenih</option>
+                            <option value="300+">Več kot 300</option>
+                        </select>
+                        <div class="error-msg">Prosimo, izberite velikost podjetja.</div>
+                    </div>
+
+                    <div class="form-group" id="group-usecase">
+                        <label>Kje vidite največ potenciala? <span class="req">*</span></label>
+                        <select id="f-usecase" name="usecase">
+                            <option value="">– Izberite –</option>
+                            <option value="finance">Finančna analitika in cashflow</option>
+                            <option value="prodaja">Prodajni dashboard in CRM analitika</option>
+                            <option value="proizvodnja">Proizvodnja in OEE kazalniki</option>
+                            <option value="projekti">Projektni management</option>
+                            <option value="vodstvo">Executive dashboard za vodstvo</option>
+                            <option value="integracije">Integracija sistemov (ERP + CRM + …)</option>
+                            <option value="napovedno">Napovedna analitika</option>
+                            <option value="ne-vem">Nisem prepričan/a — rabim svetovanje</option>
+                        </select>
+                        <div class="error-msg">Prosimo, izberite področje.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sporočilo (neobvezno)</label>
+                        <textarea id="f-message" name="message" placeholder="Opišite vaš izziv ali sisteme, ki jih uporabljate …"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        Zaprosite za brezplačen posvet
+                    </button>
+
+                    <p class="form-note">
+                        Vaši podatki so varni. Kontaktirali vas bomo v roku 1 delovnega dne.<br>
+                        <a href="https://stroka.si/Varstvo-osebnih-podatkov" target="_blank">Izjava o zasebnosti</a>
+                    </p>
+                </form>
+            </div>
+            <div class="success-state" id="successState">
+                <div class="success-icon">✓</div>
+                <h3>Prijava uspešna!</h3>
+                <p>Hvala za vaše zaupanje. Naš strokovnjak vas bo kontaktiral v enem delovnem dnevu za brezplačen Power BI posvet.</p>
+                <p style="margin-top: 10px; font-size: 12px; color: #aaa;">Za nujne zadeve: <a href="mailto:ccc@stroka.si" style="color: var(--teal);">ccc@stroka.si</a></p>
+            </div>
+        </div>
+
+        <div class="contact-strip">
+            <p><strong style="color: var(--dark);">Skupina stroka.si</strong><br>
+            <a href="tel:+38628879780">+386 (0)2 88 79 780</a><br>
+            <a href="mailto:ccc@stroka.si">ccc@stroka.si</a></p>
+        </div>
+    </div>
+
+</div>
+
+<div class="site-footer">
+    <img src="https://www.stroka.si/Portals/_default/logo_stroka_si_white.png?ver=2025-06-04-113611-483&timestamp=1749029751774" alt="Stroka.si">
+    <p>Skupina stroka.si, Stroka produkt d.o.o.</p>
+    <p><a href="mailto:ccc@stroka.si">ccc@stroka.si</a> &nbsp;|&nbsp; +386 (0)2 88 79 780 &nbsp;|&nbsp; <a href="https://www.stroka.si">www.stroka.si</a></p>
+    <p style="margin-top: 10px; font-size: 11px;">© 2026 Stroka produkt d.o.o. Vse pravice pridržane.</p>
+</div>
+
+<script>
+var SCRIPT_URL = 'POWER_AUTOMATE_URL_PLACEHOLDER';
+
+var totalItems = 10;
+
+function toggleCheck(el) {
+    el.classList.toggle('checked');
+    updateScore();
+}
+
+function updateScore() {
+    var checked = document.querySelectorAll('.checklist-item.checked').length;
+    var pct = Math.round((checked / totalItems) * 100);
+
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressScore').textContent = checked + ' / ' + totalItems + ' točk';
+
+    var box = document.getElementById('resultBox');
+    var scoreEl = document.getElementById('resultScore');
+    var titleEl = document.getElementById('resultTitle');
+    var descEl = document.getElementById('resultDesc');
+
+    scoreEl.textContent = checked + '/10';
+    box.classList.remove('level-low', 'level-mid', 'level-high');
+
+    if (checked <= 3) {
+        box.classList.add('level-low');
+        titleEl.textContent = 'Močan signal — Power BI bi vam konkretno pomagal';
+        descEl.textContent = 'Vaše podjetje ima klasične simptome, ki jih Power BI rešuje. Priporočamo brezplačen posvet, na katerem ocenimo, katero področje je smiselno nasloviti najprej.';
+    } else if (checked <= 6) {
+        box.classList.add('level-mid');
+        titleEl.textContent = 'Dober potencial — vredna je podrobnejša ocena';
+        descEl.textContent = 'Prepoznali smo več področij, kjer bi Power BI prinesel vrednost. Posvet vam bo pomagal oceniti, kje je ROI največji in kaj je smiselno prioritizirati.';
+    } else {
+        box.classList.add('level-high');
+        titleEl.textContent = 'Visoka pripravljenost — odličen čas za začetek';
+        descEl.textContent = 'Vaše podjetje je dobro pripravljeno za implementacijo Power BI. Priporočamo hitro preverjanje obstoječe infrastrukture in definicijo prvih dashboardov.';
+    }
+
+    if (!document.getElementById('resultCta')) {
+        var cta = document.createElement('a');
+        cta.id = 'resultCta';
+        cta.href = '#form-anchor';
+        cta.className = 'result-cta';
+        cta.textContent = 'Zaprosite za brezplačen posvet →';
+        cta.onclick = function(e) {
+            e.preventDefault();
+            document.getElementById('form-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+        box.appendChild(cta);
+    }
+}
+
+function validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+function setError(groupId, show) {
+    var g = document.getElementById(groupId);
+    if (!g) return;
+    var input = g.querySelector('input, select, textarea');
+    if (show) { g.classList.add('input-error'); if (input) input.classList.add('error'); }
+    else { g.classList.remove('input-error'); if (input) input.classList.remove('error'); }
+}
+
+document.getElementById('consultForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var name    = document.getElementById('f-name').value.trim();
+    var company = document.getElementById('f-company').value.trim();
+    var email   = document.getElementById('f-email').value.trim();
+    var size    = document.getElementById('f-size').value;
+    var usecase = document.getElementById('f-usecase').value;
+    var phone   = document.getElementById('f-phone').value.trim();
+    var message = document.getElementById('f-message').value.trim();
+    var checked = document.querySelectorAll('.checklist-item.checked').length;
+    var bi_score = checked + '/10';
+
+    var err = false;
+    if (!name)                        { setError('group-name', true);    err = true; } else { setError('group-name', false); }
+    if (!company)                     { setError('group-company', true); err = true; } else { setError('group-company', false); }
+    if (!email || !validateEmail(email)) { setError('group-email', true);  err = true; } else { setError('group-email', false); }
+    if (!size)                        { setError('group-size', true);    err = true; } else { setError('group-size', false); }
+    if (!usecase)                     { setError('group-usecase', true); err = true; } else { setError('group-usecase', false); }
+    if (err) return;
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Pošiljanje...';
+
+    var payload = JSON.stringify({
+        name: name,
+        company: company,
+        email: email,
+        phone: phone,
+        size: size,
+        usecase: usecase,
+        message: message,
+        bi_score: bi_score,
+        source: 'Prirocnik Power BI – 5 znakov',
+        timestamp: new Date().toISOString()
+    });
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', SCRIPT_URL, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            document.getElementById('formBody').querySelector('form').style.display = 'none';
+            document.getElementById('successState').style.display = 'block';
+        } else {
+            btn.disabled = false;
+            btn.innerHTML = 'Zaprosite za brezplačen posvet';
+            alert('Pri oddaji je prišlo do napake. Prosimo, kontaktirajte nas na ccc@stroka.si');
+        }
+    };
+    xhr.onerror = function() {
+        btn.disabled = false;
+        btn.innerHTML = 'Zaprosite za brezplačen posvet';
+        alert('Napaka pri pošiljanju. Preverite internetno povezavo.');
+    };
+    xhr.send(payload);
+});
+</script>
+</body>
+</html>
