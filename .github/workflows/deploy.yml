@@ -20,19 +20,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-- name: Inject Power Automate URL
-  env:
-    POWER_AUTOMATE_URL: ${{ secrets.POWER_AUTOMATE_URL }}
-  run: |
-    python - <<'PY'
-    import os
-    from pathlib import Path
+      - name: Inject Power Automate URL
+        env:
+          POWER_AUTOMATE_URL: ${{ secrets.POWER_AUTOMATE_URL }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
 
-    p = Path("5-znakov.html")
-    s = p.read_text(encoding="utf-8")
-    s = s.replace("POWER_AUTOMATE_URL_PLACEHOLDER", os.environ["POWER_AUTOMATE_URL"])
-    p.write_text(s, encoding="utf-8")
-    PY
+          p = Path("5-znakov.html")
+          s = p.read_text(encoding="utf-8")
+          s = s.replace("POWER_AUTOMATE_URL_PLACEHOLDER", os.environ["POWER_AUTOMATE_URL"])
+          p.write_text(s, encoding="utf-8")
+          PY
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
