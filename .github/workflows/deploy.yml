@@ -1,19 +1,37 @@
-- name: Inject Power Automate URL
-  env:
-    PA_URL: ${{ secrets.POWER_AUTOMATE_URL }}
-  run: |
-    python3 << 'PYEOF'
-    import os
+name: Deploy
 
-    file_path = '5-znakov.html'
+on:
+  push:
+    branches: [ main ]
 
-    with open(file_path, 'r') as f:
-        content = f.read()
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-    content = content.replace('POWER_AUTOMATE_URL_PLACEHOLDER', os.environ['PA_URL'])
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-    with open(file_path, 'w') as f:
-        f.write(content)
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-    print('URL injected successfully')
-    PYEOF
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inject Power Automate URL
+        run: |
+          sed -i "s|POWER_AUTOMATE_URL_PLACEHOLDER|${{ secrets.POWER_AUTOMATE_URL }}|g" 5-znakov.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
