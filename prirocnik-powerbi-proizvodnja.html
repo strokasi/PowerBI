@@ -890,6 +890,18 @@ document.getElementById('consultForm').addEventListener('submit', function(e) {
     };
     xhr.send(payload);
 });
+
+var backToArticle = document.getElementById('backToArticle');
+
+if (backToArticle) {
+    backToArticle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        window.location.href = this.href;
+    }, true);
+}
 </script>
 </body>
 </html>
