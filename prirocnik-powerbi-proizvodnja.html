@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 razlogov, zakaj vaša proizvodnja ni dovolj učinkovita | Skupina stroka.si</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #50afb0;
+            --teal-dark: #3d8c8d;
+            --teal-light: #e8f6f6;
+            --red: #e35c4f;
+            --red-dark: #c44a3d;
+            --red-light: #fdf0ee;
+            --amber: #f59e0b;
+            --amber-light: #fef3c7;
+            --green: #22c55e;
+            --green-light: #dcfce7;
+            --black: #111111;
+            --dark: #1a1a1a;
+            --mid: #555;
+            --light: #888;
+            --border: #e5e5e5;
+            --bg: #f8f8f6;
+            --white: #fff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--dark);
+            background: var(--white);
+            line-height: 1.65;
+        }
+
+        .topbar {
+            background: var(--black);
+            padding: 14px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .topbar img { height: 28px; }
+        .topbar-link { font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; }
+        .topbar-link:hover { color: var(--teal); }
+
+        .hero {
+            background: var(--black);
+            padding: 72px 48px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 420px; height: 100%;
+            background: radial-gradient(ellipse at top right, rgba(80,175,176,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal) 0%, var(--teal-dark) 30%, transparent 80%);
+        }
+        .hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(80,175,176,0.15);
+            border: 1px solid rgba(80,175,176,0.3);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+            line-height: 1.15;
+            color: var(--white);
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        .hero h1 em { font-style: italic; color: var(--teal); }
+        .hero-desc {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.55);
+            font-weight: 300;
+            max-width: 580px;
+            line-height: 1.75;
+        }
+        .hero-meta {
+            display: flex;
+            gap: 28px;
+            margin-top: 28px;
+        }
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+        }
+        .hero-meta-item span { color: var(--teal); font-weight: 600; }
+
+        .progress-bar-wrap {
+            background: var(--teal-light);
+            padding: 20px 48px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .progress-label { font-size: 13px; color: var(--teal-dark); font-weight: 500; white-space: nowrap; }
+        .progress-bar { flex: 1; height: 6px; background: rgba(80,175,176,0.25); border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--teal); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+        .progress-score { font-size: 14px; font-weight: 600; color: var(--teal-dark); white-space: nowrap; }
+
+        .main-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 64px 48px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .section-block { margin-bottom: 56px; }
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-icon {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; flex-shrink: 0;
+        }
+        .section-icon.reason  { background: var(--red-light); }
+        .section-icon.action  { background: var(--teal-light); }
+        .section-icon.check   { background: var(--green-light); }
+        .section-icon.case    { background: var(--amber-light); }
+
+        .section-num { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--light); margin-bottom: 4px; }
+        .section-title { font-family: 'DM Serif Display', serif; font-size: 1.55rem; font-weight: 400; color: var(--black); line-height: 1.2; }
+
+        .guide-content p { font-size: 0.95rem; color: var(--mid); line-height: 1.8; margin-bottom: 18px; }
+        .guide-content strong { color: var(--dark); font-weight: 500; }
+
+        /* Reason cards */
+        .reason-card {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px 24px;
+            margin-bottom: 14px;
+            background: var(--white);
+            border-left: 4px solid var(--red);
+            transition: box-shadow 0.2s;
+        }
+        .reason-card:hover { box-shadow: 0 4px 16px rgba(227,92,79,0.1); }
+        .reason-num {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            color: var(--red);
+            line-height: 1;
+            flex-shrink: 0;
+            width: 36px;
+            font-weight: 400;
+        }
+        .reason-body h4 { font-size: 14.5px; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
+        .reason-body p { font-size: 13px; color: var(--mid); margin: 0; line-height: 1.6; }
+        .reason-fix {
+            margin-top: 10px;
+            font-size: 12.5px;
+            color: var(--teal-dark);
+            background: var(--teal-light);
+            padding: 8px 12px;
+            border-radius: 6px;
+            line-height: 1.55;
+        }
+        .reason-fix strong { color: var(--teal-dark); }
+
+        /* Case study cards */
+        .case-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--amber);
+            border-radius: 10px;
+            padding: 22px 24px;
+            margin-bottom: 16px;
+        }
+        .case-tag {
+            font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #92400e;
+            background: var(--amber-light); padding: 3px 10px;
+            border-radius: 4px; display: inline-block; margin-bottom: 10px;
+        }
+        .case-card h4 { font-size: 14.5px; font-weight: 500; color: var(--dark); margin-bottom: 8px; }
+        .case-card p { font-size: 13px; color: var(--mid); margin: 0; line-height: 1.6; }
+        .case-result {
+            margin-top: 12px; font-size: 12.5px; font-weight: 500;
+            color: #166534; background: var(--green-light);
+            padding: 8px 12px; border-radius: 6px; line-height: 1.55;
+        }
+
+        /* Step cards */
+        .step-card {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--white);
+            transition: border-color 0.2s;
+        }
+        .step-card:hover { border-color: var(--teal); }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--teal); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 600; color: white; flex-shrink: 0;
+        }
+        .step-body h4 { font-size: 14.5px; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
+        .step-body p { font-size: 13px; color: var(--mid); margin: 0; line-height: 1.6; }
+        .step-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .tool-tag { font-size: 11px; font-weight: 500; color: var(--teal-dark); background: var(--teal-light); padding: 3px 10px; border-radius: 4px; }
+
+        /* Checklist */
+        .checklist-intro { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
+        .checklist-intro p { font-size: 13px; color: var(--mid); margin: 0; }
+        .checklist { list-style: none; }
+        .checklist-category {
+            font-size: 10px; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--light);
+            padding: 16px 0 8px; border-top: 1px solid var(--border); margin-top: 8px;
+        }
+        .checklist-category:first-child { border-top: none; margin-top: 0; }
+        .checklist-item {
+            display: flex; align-items: flex-start; gap: 14px;
+            cursor: pointer; transition: background 0.15s; border-radius: 6px;
+            padding: 14px 12px; margin: 2px 0;
+        }
+        .checklist-item:hover { background: var(--bg); }
+        .checklist-item.checked { background: var(--green-light); }
+        .checklist-item.checked .ci-text { color: #166534; }
+        .checklist-item.checked .ci-sub { color: #16a34a; }
+        .ci-checkbox {
+            width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px;
+            flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s; margin-top: 1px;
+        }
+        .checklist-item.checked .ci-checkbox { background: var(--green); border-color: var(--green); }
+        .ci-check-icon { display: none; color: white; font-size: 13px; font-weight: 700; }
+        .checklist-item.checked .ci-check-icon { display: block; }
+        .ci-main { font-size: 14px; font-weight: 500; color: var(--dark); line-height: 1.4; }
+        .ci-sub { font-size: 12px; color: var(--light); margin-top: 3px; line-height: 1.4; }
+        .ci-badge { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-left: 8px; }
+        .badge-high { background: var(--red-light); color: var(--red-dark); }
+        .badge-med  { background: var(--amber-light); color: #92400e; }
+        .badge-low  { background: var(--teal-light); color: var(--teal-dark); }
+
+        /* Result box */
+        .result-box { margin-top: 28px; border-radius: 12px; padding: 24px; border: 2px solid var(--border); transition: all 0.3s; }
+        .result-box.level-low  { border-color: var(--red);   background: var(--red-light); }
+        .result-box.level-mid  { border-color: var(--amber); background: var(--amber-light); }
+        .result-box.level-high { border-color: var(--green); background: var(--green-light); }
+        .result-score { font-family: 'DM Serif Display', serif; font-size: 2.8rem; font-weight: 400; margin-bottom: 6px; }
+        .level-low  .result-score { color: var(--red-dark); }
+        .level-mid  .result-score { color: #92400e; }
+        .level-high .result-score { color: #166534; }
+        .result-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+        .level-low  .result-title { color: var(--red-dark); }
+        .level-mid  .result-title { color: #78350f; }
+        .level-high .result-title { color: #166534; }
+        .result-desc { font-size: 13px; line-height: 1.6; }
+        .level-low  .result-desc { color: #7a2d23; }
+        .level-mid  .result-desc { color: #92400e; }
+        .level-high .result-desc { color: #16a34a; }
+        .result-cta { display: inline-block; margin-top: 16px; font-size: 13px; font-weight: 600; padding: 10px 22px; border-radius: 8px; text-decoration: none; transition: opacity 0.2s; }
+        .result-cta:hover { opacity: 0.85; }
+        .level-low  .result-cta { background: var(--red);   color: white; }
+        .level-mid  .result-cta { background: var(--amber); color: white; }
+        .level-high .result-cta { background: var(--green); color: white; }
+
+        /* Form */
+        .guide-sidebar { position: sticky; top: 24px; }
+        .form-card { background: white; border: 1.5px solid var(--teal); border-radius: 14px; overflow: hidden; box-shadow: 0 8px 40px rgba(80,175,176,0.12); }
+        .form-head { background: var(--teal); padding: 24px 26px; color: white; }
+        .form-head .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; margin-bottom: 8px; }
+        .form-head h2 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; font-weight: 400; line-height: 1.25; margin-bottom: 8px; }
+        .form-head .sub { font-size: 13px; opacity: 0.75; line-height: 1.5; }
+        .form-body { padding: 22px 26px 26px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 12.5px; font-weight: 500; color: var(--dark); margin-bottom: 5px; }
+        .req { color: var(--red); }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%; padding: 10px 13px; border: 1.5px solid var(--border); border-radius: 8px;
+            font-size: 13.5px; font-family: 'DM Sans', sans-serif; color: var(--dark);
+            background: white; transition: border-color 0.2s; outline: none;
+            appearance: none; -webkit-appearance: none;
+        }
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 13px center; padding-right: 32px; cursor: pointer;
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--teal); box-shadow: 0 0 0 3px rgba(80,175,176,0.1);
+        }
+        .error-msg { font-size: 12px; color: var(--red); margin-top: 4px; display: none; }
+        .input-error .error-msg { display: block; }
+        .input-error input, .input-error select { border-color: var(--red); }
+        .form-divider { height: 1px; background: var(--border); margin: 18px 0; }
+        .btn-submit { width: 100%; background: var(--teal); color: white; border: none; border-radius: 8px; padding: 14px; font-size: 14.5px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
+        .btn-submit:hover { background: var(--teal-dark); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+        .form-note { margin-top: 12px; font-size: 11.5px; color: var(--light); text-align: center; line-height: 1.55; }
+        .form-note a { color: var(--teal); }
+        .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .success-state { display: none; padding: 36px 26px; text-align: center; }
+        .success-icon { width: 56px; height: 56px; background: var(--teal-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px; color: var(--teal-dark); }
+        .success-state h3 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 10px; }
+        .success-state p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+        .contact-strip { margin-top: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+        .contact-strip p { font-size: 12.5px; color: var(--mid); line-height: 1.6; }
+        .contact-strip a { color: var(--teal); text-decoration: none; }
+
+        .site-footer { background: var(--black); padding: 48px; text-align: center; margin-top: 80px; }
+        .site-footer img { height: 26px; margin-bottom: 18px; }
+        .site-footer p { font-size: 13px; color: rgba(255,255,255,0.35); margin: 4px 0; }
+        .site-footer a { color: var(--teal); text-decoration: none; }
+
+        @media (max-width: 900px) {
+            .main-wrap { grid-template-columns: 1fr; padding: 40px 24px; }
+            .guide-sidebar { position: static; }
+            .hero { padding: 56px 24px 48px; }
+            .topbar, .progress-bar-wrap, .site-footer { padding-left: 24px; padding-right: 24px; }
+            .hero-meta { flex-wrap: wrap; gap: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <a href="https://www.stroka.si" target="_blank">
+        <img src="https://www.stroka.si/Portals/_default/logo_stroka_si_white.png?ver=2025-06-04-113611-483&timestamp=1749029751774" alt="Stroka.si">
+    </a>
+    <a href="#" class="topbar-link">← Nazaj na članek</a>
+</div>
+
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">Brezplačen priročnik · Skupina stroka.si</div>
+        <h1><em>5 razlogov</em>, zakaj vaša<br>proizvodnja ni dovolj učinkovita</h1>
+        <p class="hero-desc">Samoocenitveni test za proizvodna podjetja — odkrijte, kje izgubljate učinkovitost in kateri korak prinese največjo vrednost.</p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">Priročnik za <span>proizvodna podjetja</span></div>
+            <div class="hero-meta-item">Teme: <span>ERP · OEE · Power BI · Digitalizacija</span></div>
+        </div>
+    </div>
+</div>
+
+<div class="progress-bar-wrap">
+    <span class="progress-label">Ocena digitalne zrelosti proizvodnje:</span>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-score" id="progressScore">0 / 10 točk</span>
+</div>
+
+<div class="main-wrap">
+
+    <div class="guide-content">
+
+        <!-- SECTION 1: 5 razlogov -->
+        <div class="section-block">
+            <div class="section-header">
+                <div class="section-icon reason">⚠</div>
+                <div class="section-title-wrap">
+                    <div class="section-num">Poglavje 01</div>
+                    <h2 class="section-title">5 razlogov, zakaj vaša proizvodnja ni dovolj učinkovita</h2>
+                </div>
+            </div>
+
+            <p>Večina proizvodnih podjetij danes ne trpi pomanjkanja podatkov. Podatki nastajajo vsak dan — v strojih, v ERP-u, na papirnatih listih vodje izmene. Problem je drugje: teh podatkov ne vidite skupaj, pravočasno in v obliki, ki omogoča hitro odločanje.</p>
+
+            <div class="reason-card">
+                <div class="reason-num">1</div>
+                <div class="reason-body">
+                    <h4>OEE izračunavate ročno — enkrat na mesec, ko je prepozno</h4>
+                    <p>Učinkovitost strojev (OEE) je ključni kazalnik vsake proizvodnje. A ko ga izračunate enkrat mesečno iz Excelovih tabel, so informacije stare tedne. Ozko grlo, ki traja teden dni, ostane neodkrito vse do mesečnega poročila.</p>
+                    <div class="reason-fix">💡 <strong>Rešitev:</strong> Power BI v integraciji z ERP sistemom ali MES sistemom prikaže OEE v realnem času — po stroju, po izmeni, po liniji. Alarmira, ko vrednost pade pod prag.</div>
+                </div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-num">2</div>
+                <div class="reason-body">
+                    <h4>Ne veste, koliko vas dejansko stane posamezen artikel</h4>
+                    <p>Cene so določene na podlagi ocen in izkušnje — ne dejanske porabe materiala, časa in energije. Ko pride pritisk na marže, ne veste, kateri artikli so donosni in kateri vas stajajo denar.</p>
+                    <div class="reason-fix">💡 <strong>Rešitev:</strong> Digitaliziran ERP (npr. PANTHEON MF) z zajemanjem podatkov na delovnih postajah zagotovi točne stroške za vsak delovni nalog — samodejno, brez ročnega vnosa.</div>
+                </div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-num">3</div>
+                <div class="reason-body">
+                    <h4>Vaši sistemi ne komunicirajo med seboj</h4>
+                    <p>ERP evidentira naročila, MES sistem pozna stanje strojev, Excel vodje vsebuje urnik izmen — a nobeden od teh virov ne govori z drugima. Celostne slike ni. Za vsako informacijo je treba vprašati napravno osebo.</p>
+                    <div class="reason-fix">💡 <strong>Rešitev:</strong> Integracija ERP + Power BI + MES/SCADA poveže vse vire v eno platformo. Vodja proizvodnje vidi celotno sliko na enem zaslonu.</div>
+                </div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-num">4</div>
+                <div class="reason-body">
+                    <h4>Napake in zastoji se odkrijejo, ko je škoda že narejena</h4>
+                    <p>Kakovostna napaka se odkri šele na koncu linije ali pri kupcu. Zastoj stroja postane problem, ko je zamuda že vidna. Ker ni zgodnjega opozarjanja, se vedno reagira — namesto da bi se preprečevalo.</p>
+                    <div class="reason-fix">💡 <strong>Rešitev:</strong> Napovedna analitika v Power BI zazna anomalije v podatkih, preden postanejo problemi. Zgodnje opozorilo daje čas za ukrepanje.</div>
+                </div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-num">5</div>
+                <div class="reason-body">
+                    <h4>Vodstvo nima žive slike — odloča na podlagi tedna starih poročil</h4>
+                    <p>Direktor ali vodja proizvodnje ne more v sekundi dobiti odgovora na: »Koliko nalogov je zaostalo?« ali »Katera linija ima danes najnižji OEE?« — razen če pokliče nekoga ali počaka na naslednje poročilo.</p>
+                    <div class="reason-fix">💡 <strong>Rešitev:</strong> Executive dashboard v Power BI — dostopen na računalniku ali mobilnem telefonu — prikaže ključne kazalnike v realnem času, brez posrednika.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Primeri iz prakse -->
+        <div class="section-block">
+            <div class="section-header">
+                <div class="section-icon case">🏭</div>
+                <div class="section-title-wrap">
+                    <div class="section-num">Poglavje 02</div>
+                    <h2 class="section-title">Primeri iz prakse: kako sta to rešili dve slovenski podjetji</h2>
+                </div>
+            </div>
+
+            <p>Spodnji primeri niso abstraktne zgodbe o digitalizaciji. To so konkretne implementacije, ki jih je Skupina stroka.si izvedla v slovenskih proizvodnih podjetjih.</p>
+
+            <div class="case-card">
+                <span class="case-tag">Primer A · Kovinskopredelovalna industrija</span>
+                <h4>Valji Group — Power BI za pregled nad proizvodnjo in projekti</h4>
+                <p>Podjetje Valji d.o.o., ki že več kot 100 let proizvaja valje za metalurška podjetja in ima več kot 800 strank v 20 državah, je imelo jasno potrebo: celovit pregled nad proizvodnimi projekti in naročili, brez čakanja na ročna poročila. V sodelovanju s Skupino stroka.si so vzpostavili Power BI v oblaku, ki je lokalne podatkovne baze naročil in delovnih nalogov povezal v interaktivne dashboarde — dostopne na vsakem računalniku in mobilni napravi.</p>
+                <div class="case-result">✓ Rezultat: Vodstvo je pridobilo celovit pregled nad proizvodnjo, skrajšalo čas priprave vpogledov in odpravilo ozka grla — proaktivno, ne reaktivno.</div>
+            </div>
+
+            <div class="case-card">
+                <span class="case-tag">Primer B · Tekstilna industrija</span>
+                <h4>Slovensko tekstilno podjetje — PANTHEON MF in popolna digitalizacija</h4>
+                <p>Vodilno slovensko tekstilno podjetje je imelo kompleksno proizvodnjo z do 30-nivojskimi kosovnicami — in vse jo je vodilo z ročno dokumentacijo. Stroški po artiklu so bili ocene, ne dejanske vrednosti. Po implementaciji PANTHEON MF sistema z Skupino stroka.si so na vseh 17 delovnih postajah namestili terminale s čitalci črtnih kod. Materiali se samodejno odpisujejo, delovni časi se beležijo v realnem času, vodstvo ima živ pregled nad vsemi nalogi.</p>
+                <div class="case-result">✓ Rezultat: Za vsak artikel imajo zdaj točen podatek o stroških izdelave. Inventura, ki je prej trajala dni, se izvede hitro. Vodstvo sprejema odločitve na podlagi dejstev.</div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: 5 korakov -->
+        <div class="section-block">
+            <div class="section-header">
+                <div class="section-icon action">🛡</div>
+                <div class="section-title-wrap">
+                    <div class="section-num">Poglavje 03</div>
+                    <h2 class="section-title">5 korakov do boljše preglednosti nad proizvodnjo</h2>
+                </div>
+            </div>
+
+            <p>Digitalizacija proizvodnje ni projekt, ki se izvede čez noč. Je strukturiran proces, kjer vsak korak gradi na prejšnjem. Pravilno zaporedje je ključno — napačno vlaganje v orodja brez osnove le poveča zmedo.</p>
+
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Popis stanja: kje nastajajo podatki in kje se izgubijo</h4>
+                    <p>Preden implementirate karkoli, ugotovite, kateri podatki nastajajo, kje so hranjeni in kje se pot izgubi. Ta analiza pogosto razkrije največ — vključno s procesi, ki jih nihče ne opazi, ker so »vedno bili takšni«.</p>
+                    <div class="step-tools"><span class="tool-tag">Posnetek stanja</span><span class="tool-tag">Procesni diagram</span></div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>Digitalizacija zajemanja podatkov na delovnih postajah</h4>
+                    <p>Terminali s čitalci črtnih kod na vseh ključnih mestih v proizvodnji. Skeniranje delovnih nalogov, materialov in operacij zagotovi ERP-u točne podatke. Brez tega so dashboardi vizualizacija napačnih informacij.</p>
+                    <div class="step-tools"><span class="tool-tag">Čitalci črtnih kod</span><span class="tool-tag">Terminali na postajah</span><span class="tool-tag">MES integracija</span></div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Konfiguracija ERP sistema za vaše specifične procese</h4>
+                    <p>Standardni ERP ne pozna vaše panoge, vaših kosovnic ali vaših tokov materialov. Prilagoditev na mero je pogoj za točne podatke — in osnova za vse, kar sledi. PANTHEON MF ali drug ERP mora biti konfiguriran za vašo dejansko realnost.</p>
+                    <div class="step-tools"><span class="tool-tag">PANTHEON MF</span><span class="tool-tag">SAP</span><span class="tool-tag">MS Dynamics</span></div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>Integracija ERP z analitično platformo Power BI</h4>
+                    <p>Power BI se poveže direktno z ERP podatkovno bazo in ustvari žive dashboarde za vsako vlogo — vodja izmene, vodja proizvodnje, controller, direktor. Vsak vidi, kar potrebuje — brez posrednika in brez čakanja.</p>
+                    <div class="step-tools"><span class="tool-tag">Power BI</span><span class="tool-tag">OEE dashboard</span><span class="tool-tag">Producijski KPI-ji</span></div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num">5</div>
+                <div class="step-body">
+                    <h4>Napovedna analitika in avtomatski alarmi</h4>
+                    <p>Ko je osnova vzpostavljena, dodajte napovedno plast: alarmi, ko OEE pade pod prag, zaznavanje anomalij v porabi materiala, napoved povpraševanja za optimizacijo zalog. Iz reaktivnega v proaktivno vodenje.</p>
+                    <div class="step-tools"><span class="tool-tag">Napovedni modeli</span><span class="tool-tag">Avtomatski alarmi</span><span class="tool-tag">AI analitika</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Checklist -->
+        <div class="section-block" id="checklist-section">
+            <div class="section-header">
+                <div class="section-icon check">✓</div>
+                <div class="section-title-wrap">
+                    <div class="section-num">Poglavje 04</div>
+                    <h2 class="section-title">Ocenite digitalno zrelost vaše proizvodnje</h2>
+                </div>
+            </div>
+
+            <div class="checklist-intro">
+                <p>Označite trditve, ki veljajo za vaše podjetje danes. Rezultat vam pokaže, kje ste in kateri korak je najpomembnejši za vas.</p>
+            </div>
+
+            <ul class="checklist" id="prodChecklist">
+
+                <li class="checklist-category">Podatki in vidnost</li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">OEE ali druge kazalnike učinkovitosti sledimo ročno ali le občasno <span class="ci-badge badge-high">Visoko tveganje</span></div>
+                        <div class="ci-sub">Izračun temelji na Excelu ali poročilih enkrat mesečno</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Stroški posameznega artikla ali delovnega naloga so ocene, ne točni podatki <span class="ci-badge badge-high">Visoko tveganje</span></div>
+                        <div class="ci-sub">Dejanski stroški materiala, časa in energije niso samodejno zajeti</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Za status nalogov ali zalog moram poklicati ali počakati na poročilo <span class="ci-badge badge-high">Visoko tveganje</span></div>
+                        <div class="ci-sub">Ni možnosti žive slike brez posrednika</div>
+                    </div>
+                </li>
+
+                <li class="checklist-category">Sistemi in integracije</li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Naš ERP sistem in proizvodni sistem ne komunicirata samodejno <span class="ci-badge badge-high">Visoko tveganje</span></div>
+                        <div class="ci-sub">Podatke med ERP-om, MES sistemom in Excelom prenašamo ročno</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Na delovnih postajah v proizvodnji ni terminalov ali čitalcev črtnih kod <span class="ci-badge badge-med">Srednje tveganje</span></div>
+                        <div class="ci-sub">Podatki se vpisujejo ročno ali na papir in pozneje vnašajo v sistem</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Sledljivost materialov skozi proizvodni proces je delna ali ni vzpostavljena <span class="ci-badge badge-med">Srednje tveganje</span></div>
+                        <div class="ci-sub">Ni natančnega vpogleda, kje je kateri material ali polproizvod v danem trenutku</div>
+                    </div>
+                </li>
+
+                <li class="checklist-category">Odločanje in načrtovanje</li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Ozka grla in napake odkrijemo, ko je problem že nastopil <span class="ci-badge badge-high">Visoko tveganje</span></div>
+                        <div class="ci-sub">Ni zgodnjega opozarjanja ali zaznave anomalij preden se napaka pojavi</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Načrtovanje kapacitet in zalog temelji na izkušnji, ne na podatkih <span class="ci-badge badge-med">Srednje tveganje</span></div>
+                        <div class="ci-sub">Ni napovednih modelov ali analiz na podlagi zgodovinskih vzorcev</div>
+                    </div>
+                </li>
+
+                <li class="checklist-category">Pripravljenost in potencial</li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Imamo ERP sistem, a ga ne izkoriščamo dovolj za analitiko <span class="ci-badge badge-low">Potencial</span></div>
+                        <div class="ci-sub">Sistem evidentira podatke, a poročil in analiz skoraj ne uporabljamo</div>
+                    </div>
+                </li>
+
+                <li class="checklist-item" data-value="1" onclick="toggleCheck(this)">
+                    <div class="ci-checkbox"><span class="ci-check-icon">✓</span></div>
+                    <div class="ci-text">
+                        <div class="ci-main">Digitalizacija proizvodnje je na agendi — a projekt se ne začne <span class="ci-badge badge-low">Potencial</span></div>
+                        <div class="ci-sub">Tema se pojavlja na sestankih, a ni jasnega načrta ali partnerja za izvedbo</div>
+                    </div>
+                </li>
+
+            </ul>
+
+            <div class="result-box" id="resultBox">
+                <div class="result-score" id="resultScore">0/10</div>
+                <div class="result-title" id="resultTitle">Začnite z ocenjevanjem</div>
+                <div class="result-desc" id="resultDesc">Označite trditve, ki veljajo za vaše podjetje, da prejmete oceno in priporočilo.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FORM -->
+    <div class="guide-sidebar" id="form-anchor">
+        <div class="form-card">
+            <div class="form-head">
+                <div class="eyebrow">Brezplačen posvet</div>
+                <h2>Odkrijte, kje vaša proizvodnja izgublja učinkovitost</h2>
+                <p class="sub">Naš strokovnjak oceni vaše okolje in predlaga konkretne korake — brez obveznosti.</p>
+            </div>
+            <div class="form-body" id="formBody">
+                <form id="consultForm" novalidate>
+
+                    <div class="form-group" id="group-name">
+                        <label>Ime in priimek <span class="req">*</span></label>
+                        <input type="text" id="f-name" name="name" placeholder="npr. Marko Horvat" autocomplete="name">
+                        <div class="error-msg">Prosimo, vnesite ime in priimek.</div>
+                    </div>
+
+                    <div class="form-group" id="group-company">
+                        <label>Podjetje <span class="req">*</span></label>
+                        <input type="text" id="f-company" name="company" placeholder="npr. Kovinar d.o.o." autocomplete="organization">
+                        <div class="error-msg">Prosimo, vnesite ime podjetja.</div>
+                    </div>
+
+                    <div class="form-group" id="group-email">
+                        <label>E-mail <span class="req">*</span></label>
+                        <input type="email" id="f-email" name="email" placeholder="npr. marko@podjetje.si" autocomplete="email">
+                        <div class="error-msg">Prosimo, vnesite veljaven e-mail naslov.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefonska številka</label>
+                        <input type="tel" id="f-phone" name="phone" placeholder="+386 …" autocomplete="tel">
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <div class="form-group" id="group-size">
+                        <label>Število zaposlenih <span class="req">*</span></label>
+                        <select id="f-size" name="size">
+                            <option value="">– Izberite –</option>
+                            <option value="1-20">1–20 zaposlenih</option>
+                            <option value="21-50">21–50 zaposlenih</option>
+                            <option value="51-150">51–150 zaposlenih</option>
+                            <option value="151-500">151–500 zaposlenih</option>
+                            <option value="500+">Več kot 500</option>
+                        </select>
+                        <div class="error-msg">Prosimo, izberite velikost podjetja.</div>
+                    </div>
+
+                    <div class="form-group" id="group-erp">
+                        <label>Kateri ERP sistem uporabljate? <span class="req">*</span></label>
+                        <select id="f-erp" name="erp">
+                            <option value="">– Izberite –</option>
+                            <option value="pantheon">PANTHEON</option>
+                            <option value="sap">SAP</option>
+                            <option value="dynamics">Microsoft Dynamics</option>
+                            <option value="drug-erp">Drug ERP sistem</option>
+                            <option value="brez-erp">Še nimamo ERP sistema</option>
+                            <option value="excel">Večinoma Excel</option>
+                        </select>
+                        <div class="error-msg">Prosimo, izberite ERP sistem.</div>
+                    </div>
+
+                    <div class="form-group" id="group-priority">
+                        <label>Največji izziv v proizvodnji <span class="req">*</span></label>
+                        <select id="f-priority" name="priority">
+                            <option value="">– Izberite –</option>
+                            <option value="oee">Sledenje OEE in učinkovitosti strojev</option>
+                            <option value="stroski">Točni stroški po artiklih/nalogih</option>
+                            <option value="integracija">Integracija sistemov (ERP + MES + BI)</option>
+                            <option value="zaloge">Sledljivost materialov in zalog</option>
+                            <option value="porocila">Hitrejša poročila za vodstvo</option>
+                            <option value="digitalizacija">Digitalizacija ročnih procesov</option>
+                            <option value="napovedna">Napovedna analitika in preprečevanje napak</option>
+                        </select>
+                        <div class="error-msg">Prosimo, izberite vaš izziv.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sporočilo (neobvezno)</label>
+                        <textarea id="f-message" name="message" placeholder="Opišite vaše okolje ali specifičen izziv …"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        Zaprosite za brezplačen posvet
+                    </button>
+
+                    <p class="form-note">
+                        Vaši podatki so varni. Kontaktirali vas bomo v roku 1 delovnega dne.<br>
+                        <a href="https://stroka.si/Varstvo-osebnih-podatkov" target="_blank">Izjava o zasebnosti</a>
+                    </p>
+                </form>
+            </div>
+            <div class="success-state" id="successState">
+                <div class="success-icon">✓</div>
+                <h3>Prijava uspešna!</h3>
+                <p>Hvala za vaše zaupanje. Naš strokovnjak za industrijske rešitve vas bo kontaktiral v enem delovnem dnevu.</p>
+                <p style="margin-top: 10px; font-size: 12px; color: #aaa;">Za nujne zadeve: <a href="mailto:ccc@stroka.si" style="color: var(--teal);">ccc@stroka.si</a></p>
+            </div>
+        </div>
+
+        <div class="contact-strip">
+            <p><strong style="color: var(--dark);">Skupina stroka.si</strong><br>
+            <a href="tel:+38628879780">+386 (0)2 88 79 780</a><br>
+            <a href="mailto:ccc@stroka.si">ccc@stroka.si</a></p>
+        </div>
+    </div>
+
+</div>
+
+<div class="site-footer">
+    <img src="https://www.stroka.si/Portals/_default/logo_stroka_si_white.png?ver=2025-06-04-113611-483&timestamp=1749029751774" alt="Stroka.si">
+    <p>Skupina stroka.si, Stroka produkt d.o.o.</p>
+    <p><a href="mailto:ccc@stroka.si">ccc@stroka.si</a> &nbsp;|&nbsp; +386 (0)2 88 79 780 &nbsp;|&nbsp; <a href="https://www.stroka.si">www.stroka.si</a></p>
+    <p style="margin-top: 10px; font-size: 11px;">© 2026 Stroka produkt d.o.o. Vse pravice pridržane.</p>
+</div>
+
+<script>
+var SCRIPT_URL = 'POWER_AUTOMATE_URL_PLACEHOLDER';
+var totalItems = 10;
+
+function toggleCheck(el) {
+    el.classList.toggle('checked');
+    updateScore();
+}
+
+function updateScore() {
+    var checked = document.querySelectorAll('.checklist-item.checked').length;
+    var pct = Math.round((checked / totalItems) * 100);
+
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressScore').textContent = checked + ' / ' + totalItems + ' točk';
+
+    var box = document.getElementById('resultBox');
+    var scoreEl = document.getElementById('resultScore');
+    var titleEl = document.getElementById('resultTitle');
+    var descEl = document.getElementById('resultDesc');
+
+    scoreEl.textContent = checked + '/10';
+    box.classList.remove('level-low', 'level-mid', 'level-high');
+
+    if (checked <= 3) {
+        box.classList.add('level-low');
+        titleEl.textContent = 'Resne vrzeli — vaša proizvodnja izgublja učinkovitost vsak dan';
+        descEl.textContent = 'Prepoznali smo kritična področja, kjer digitalizacija in integracija sistemov prineseta takojšnjo vrednost. Priporočamo brezplačen posvet, na katerem skupaj določimo prioritete.';
+    } else if (checked <= 6) {
+        box.classList.add('level-mid');
+        titleEl.textContent = 'Delna digitalizacija — so konkretne priložnosti za izboljšave';
+        descEl.textContent = 'Imate temelje, a obstajajo jasne vrzeli. Posvet vam bo pomagal ugotoviti, kateri korak prinese največji ROI glede na vaše obstoječe sisteme.';
+    } else {
+        box.classList.add('level-high');
+        titleEl.textContent = 'Visoka zrelost — čas za naslednjo stopnjo';
+        descEl.textContent = 'Vaša proizvodnja je dobro digitalizirana. Priporočamo posvet o napredni analitiki, napovednih modelih in optimizacijah, ki ste jih morda spregledali.';
+    }
+
+    if (!document.getElementById('resultCta')) {
+        var cta = document.createElement('a');
+        cta.id = 'resultCta';
+        cta.href = '#form-anchor';
+        cta.className = 'result-cta';
+        cta.textContent = 'Zaprosite za brezplačen posvet →';
+        cta.onclick = function(e) {
+            e.preventDefault();
+            document.getElementById('form-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+        box.appendChild(cta);
+    }
+}
+
+function validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+function setError(groupId, show) {
+    var g = document.getElementById(groupId);
+    if (!g) return;
+    var input = g.querySelector('input, select, textarea');
+    if (show) { g.classList.add('input-error'); if (input) input.classList.add('error'); }
+    else { g.classList.remove('input-error'); if (input) input.classList.remove('error'); }
+}
+
+document.getElementById('consultForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var name     = document.getElementById('f-name').value.trim();
+    var company  = document.getElementById('f-company').value.trim();
+    var email    = document.getElementById('f-email').value.trim();
+    var size     = document.getElementById('f-size').value;
+    var erp      = document.getElementById('f-erp').value;
+    var priority = document.getElementById('f-priority').value;
+    var phone    = document.getElementById('f-phone').value.trim();
+    var message  = document.getElementById('f-message').value.trim();
+    var checked  = document.querySelectorAll('.checklist-item.checked').length;
+    var bi_score = checked + '/10';
+
+    var err = false;
+    if (!name)                         { setError('group-name', true);     err = true; } else { setError('group-name', false); }
+    if (!company)                      { setError('group-company', true);  err = true; } else { setError('group-company', false); }
+    if (!email || !validateEmail(email)) { setError('group-email', true);   err = true; } else { setError('group-email', false); }
+    if (!size)                         { setError('group-size', true);     err = true; } else { setError('group-size', false); }
+    if (!erp)                          { setError('group-erp', true);      err = true; } else { setError('group-erp', false); }
+    if (!priority)                     { setError('group-priority', true); err = true; } else { setError('group-priority', false); }
+    if (err) return;
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Pošiljanje...';
+
+    var payload = JSON.stringify({
+        name: name, company: company, email: email, phone: phone,
+        size: size, erp: erp, priority: priority, message: message,
+        bi_score: bi_score,
+        source: 'Prirocnik Power BI – 5 razlogov proizvodnja',
+        timestamp: new Date().toISOString()
+    });
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', SCRIPT_URL, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            document.getElementById('formBody').querySelector('form').style.display = 'none';
+            document.getElementById('successState').style.display = 'block';
+        } else {
+            btn.disabled = false;
+            btn.innerHTML = 'Zaprosite za brezplačen posvet';
+            alert('Pri oddaji je prišlo do napake. Prosimo, kontaktirajte nas na ccc@stroka.si');
+        }
+    };
+    xhr.onerror = function() {
+        btn.disabled = false;
+        btn.innerHTML = 'Zaprosite za brezplačen posvet';
+        alert('Napaka pri pošiljanju. Preverite internetno povezavo.');
+    };
+    xhr.send(payload);
+});
+</script>
+</body>
+</html>
